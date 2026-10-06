@@ -46,13 +46,13 @@ input,select,textarea{width:100%;padding:11px;border:1px solid var(--ln);border-
 const $=s=>document.querySelector(s),uid=()=>Math.random().toString(36).slice(2,9),now=()=>new Date().toISOString();
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const TERMS='carryon-2026-10-v1';
-const CATS=['Tops','Knitwear','Jackets & Coats','Dresses & Skirts','Trousers & Shorts','Smart & Evening','Swimwear & Beachwear','Activewear','Nightwear','Underwear & Socks','Hats & Accessories','Footwear','Toiletries','Health & Meds','Electronics','Bags','Other','Wish List'];
-const EM={'Tops':'👕','Knitwear':'🧶','Jackets & Coats':'🧥','Dresses & Skirts':'👗','Trousers & Shorts':'👖','Smart & Evening':'👔','Swimwear & Beachwear':'👙','Activewear':'🩳','Nightwear':'🌙','Underwear & Socks':'🧦','Hats & Accessories':'👒','Footwear':'👟','Toiletries':'🧴','Health & Meds':'💊','Electronics':'🔌','Bags':'🧳','Other':'📦','Wish List':'⭐'};
+const CATS=['Tops','Knitwear','Jackets & Coats','Dresses & Skirts','Trousers & Shorts','Smart & Evening','Swimwear & Beachwear','Activewear','Nightwear','Underwear & Socks','Hats & Accessories','Footwear','Toiletries','Health & Meds','Electronics','Other'];
+const EM={'Tops':'👕','Knitwear':'🧶','Jackets & Coats':'🧥','Dresses & Skirts':'👗','Trousers & Shorts':'👖','Smart & Evening':'👔','Swimwear & Beachwear':'👙','Activewear':'🩳','Nightwear':'🌙','Underwear & Socks':'🧦','Hats & Accessories':'👒','Footwear':'👟','Toiletries':'🧴','Health & Meds':'💊','Electronics':'🔌','Other':'📦'};
 const WORN=['Tops','Knitwear','Jackets & Coats','Dresses & Skirts','Trousers & Shorts','Smart & Evening','Swimwear & Beachwear','Activewear','Nightwear','Underwear & Socks','Hats & Accessories','Footwear'];
 const slug=c=>c.toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''),bySlug=s=>CATS.find(c=>slug(c)==s);
 const norm=s=>String(s).toLowerCase().replace(/[^a-z]/g,'').replace(/s$/,'');
-const CMAP=Object.fromEntries(CATS.map(c=>[norm(c),c]));[['top,tshirt,shirt,blouse','Tops'],['jumper,sweater,cardigan,hoodie,fleece','Knitwear'],['jacket,coat,raincoat','Jackets & Coats'],['dress,skirt','Dresses & Skirts'],['trouser,short,jeans,bottom,legwear','Trousers & Shorts'],['smart,evening,formal','Smart & Evening'],['swimwear,beachwear,swim','Swimwear & Beachwear'],['gym,sportswear','Activewear'],['pyjama,sleepwear,nightwear','Nightwear'],['underwear,sock,socks','Underwear & Socks'],['hat,accessory,accessories,hatsandaccessories','Hats & Accessories'],['shoe,shoes','Footwear'],['toiletry,toiletries,washbag','Toiletries'],['health,medication,medicine,meds,firstaid','Health & Meds'],['bag,luggage,suitcase','Bags']].forEach(([k,v])=>k.split(',').forEach(x=>CMAP[norm(x)]=v));
-const OLDCAT={};
+const CMAP=Object.fromEntries(CATS.map(c=>[norm(c),c]));[['top,tshirt,shirt,blouse','Tops'],['jumper,sweater,cardigan,hoodie,fleece','Knitwear'],['jacket,coat,raincoat','Jackets & Coats'],['dress,skirt','Dresses & Skirts'],['trouser,short,jeans,bottom,legwear','Trousers & Shorts'],['smart,evening,formal','Smart & Evening'],['swimwear,beachwear,swim','Swimwear & Beachwear'],['gym,sportswear','Activewear'],['pyjama,sleepwear,nightwear','Nightwear'],['underwear,sock,socks','Underwear & Socks'],['hat,accessory,accessories,hatsandaccessories','Hats & Accessories'],['shoe,shoes','Footwear'],['toiletry,toiletries,washbag','Toiletries'],['health,medication,medicine,meds,firstaid','Health & Meds'],['bag,luggage,suitcase,wishlist','Other']].forEach(([k,v])=>k.split(',').forEach(x=>CMAP[norm(x)]=v));
+const OLDCAT={'Bags':'Other','Wish List':'Other'};
 function guess(t){t=String(t).toLowerCase();const h=r=>r.test(t);
 return h(/toothpaste|toothbrush|shampoo|conditioner|shower|deodorant|razor|soap|face ?wash|moistur|sunscreen|suncream|spf|perfume|cologne|mascara|make-?up|lipstick|floss|hairbrush|comb|tampon|contact lens|wash ?bag|toiletr/)?'Toiletries'
 :h(/plaster|paracetamol|ibuprofen|medic|antihistamine|first aid|prescription|inhaler|repellent|rehydrat/)?'Health & Meds'
@@ -68,8 +68,7 @@ return h(/toothpaste|toothbrush|shampoo|conditioner|shower|deodorant|razor|soap|
 :h(/t-?shirt|\btee\b|shirt|blouse|\btop\b|vest|polo|tank/)?'Tops'
 :h(/\bhat\b|\bcap\b|beanie|sunglass|scarf|glove|belt|watch|jewel|bandana|umbrella/)?'Hats & Accessories'
 :h(/shoe|boot|sandal|flip-?flop|trainer|slipper|heels?/)?'Footwear'
-:h(/phone|charger|power ?bank|adapter|battery|cable|camera|earbud|headphone|speaker|kindle|ipad|laptop/)?'Electronics'
-:h(/suitcase|luggage|backpack|rucksack|holdall|duffle|tote|\bbag\b/)?'Bags':'Other'}
+:h(/phone|charger|power ?bank|adapter|battery|cable|camera|earbud|headphone|speaker|kindle|ipad|laptop/)?'Electronics':'Other'}
 
 /* ---------- storage layer (swap this for a cloud store later) ---------- */
 const Store={K:'carryon.v1',OLD:'carryon.v0',
@@ -82,7 +81,7 @@ let S=Store.load();const save=()=>Store.save(S);
 const nm=i=>((i.brand?i.brand+' ':'')+i.model).trim();
 
 /* ---------- icons: illustrated images in /icons ---------- */
-const HAS={m:['activewear', 'bags', 'footwear', 'hats-and-accessories', 'health-and-meds', 'jackets-and-coats', 'knitwear', 'nightwear', 'smart-and-evening', 'swimwear-and-beachwear', 'toiletries', 'tops', 'trousers-and-shorts', 'underwear-and-socks'],f:['activewear', 'bags', 'dresses-and-skirts', 'footwear', 'hats-and-accessories', 'health-and-meds', 'jackets-and-coats', 'knitwear', 'nightwear', 'smart-and-evening', 'swimwear-and-beachwear', 'toiletries', 'tops', 'underwear-and-socks']};
+const HAS={m:['activewear', 'electronics', 'footwear', 'hats-and-accessories', 'health-and-meds', 'jackets-and-coats', 'knitwear', 'nightwear', 'other', 'smart-and-evening', 'swimwear-and-beachwear', 'toiletries', 'tops', 'trousers-and-shorts', 'underwear-and-socks'],f:['activewear', 'dresses-and-skirts', 'electronics', 'footwear', 'hats-and-accessories', 'health-and-meds', 'jackets-and-coats', 'knitwear', 'nightwear', 'other', 'smart-and-evening', 'swimwear-and-beachwear', 'toiletries', 'tops', 'underwear-and-socks']};
 const svg=c=>{const k=slug(c),st=S.settings.style=='f'?'f':'m',src=HAS[st].includes(k)?st+'-'+k:k=='trousers-and-shorts'?'m-'+k:null;return src?`<img src="icons/${src}.webp" alt="" decoding="async">`:`<span class="em">${EM[c]}</span>`};
 const vis=c=>!(c=='Dresses & Skirts'&&S.settings.style!='f'&&!cnt(S.inventory.filter(i=>i.category==c)));
 
