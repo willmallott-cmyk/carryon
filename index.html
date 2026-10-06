@@ -8,8 +8,8 @@
 <style>
 :root{--bg:#f7f7f4;--cd:#fff;--tx:#1f3354;--mu:#66738a;--ln:#dfe5ea;--circ:#dce9f1;--ac:#e8731c;--acb:#fdeee0;--ok:#1f8a4c;--wn:#b45309;--wnb:#fef3c7;--bad:#c62828;--pri:#1f3354;--on:#fff}
 @media(prefers-color-scheme:dark){:root{--bg:#0f1620;--cd:#162130;--tx:#eaf0f6;--mu:#9aa8ba;--ln:#263548;--circ:#1f3044;--ac:#f0954a;--acb:#3a2a1c;--ok:#4cc78b;--wn:#f2b24c;--wnb:#3a2f14;--bad:#ff7a73;--pri:#eaf0f6;--on:#0f1620}}
-*{box-sizing:border-box}body{margin:0;font:16px/1.4 -apple-system,system-ui,sans-serif;background:var(--bg);color:var(--tx);padding-top:env(safe-area-inset-top)}
-#app{max-width:640px;margin:auto;padding:12px 16px calc(88px + env(safe-area-inset-bottom))}#app.wide{max-width:960px}
+*{box-sizing:border-box}html,body{height:100%}body{height:100dvh;display:flex;flex-direction:column;overflow:hidden;overscroll-behavior:none}body{margin:0;font:16px/1.4 -apple-system,system-ui,sans-serif;background:var(--bg);color:var(--tx);padding-top:env(safe-area-inset-top)}
+#app{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;width:100%;max-width:640px;margin:0 auto;padding:12px 16px 24px}#app.wide{max-width:960px}
 h1{font-size:26px;margin:8px 0 14px;display:flex;justify-content:space-between;align-items:center;gap:8px;letter-spacing:-.01em}h1 span{display:flex;gap:8px}
 h3{font-size:12px;color:var(--mu);font-weight:600;margin:20px 0 6px;text-transform:uppercase;letter-spacing:.06em}
 .c{background:var(--cd);border:1px solid var(--ln);border-radius:12px;overflow:hidden}.r{display:flex;gap:10px;align-items:center;padding:12px;border-top:1px solid var(--ln);min-height:48px}.r:first-child{border-top:0}.r>div{flex:1;min-width:0}
@@ -25,7 +25,7 @@ button.l{border:0;background:none;color:var(--ac);padding:0 6px;min-height:36px}
 input,select,textarea{width:100%;padding:11px;border:1px solid var(--ln);border-radius:10px;background:var(--cd);margin:4px 0}textarea{min-height:120px}
 .bar{height:7px;background:var(--ln);border-radius:4px;overflow:hidden;margin:8px 0 4px}.bar i{display:block;height:100%;background:var(--pri)}
 .seg{display:flex;gap:6px;margin:8px 0}.seg button{flex:1}.seg .on{background:var(--acb);border-color:var(--ac);color:var(--ac);font-weight:600}
-.tabs{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--cd);border-top:1px solid var(--ln);padding-bottom:env(safe-area-inset-bottom)}.tabs a{flex:1;text-align:center;padding:13px 0;color:var(--mu);text-decoration:none;font-size:13px}.tabs a.on{color:var(--ac);font-weight:600}
+.tabs{flex:none;display:flex;background:var(--cd);border-top:1px solid var(--ln);padding-bottom:env(safe-area-inset-bottom)}.tabs a{flex:1;text-align:center;padding:13px 0;color:var(--mu);text-decoration:none;font-size:13px}.tabs a.on{color:var(--ac);font-weight:600}
 .warn{background:var(--wnb);color:var(--wn);padding:9px 12px;border-radius:10px;font-size:14px;margin-bottom:8px}.ft{font-size:12px;color:var(--mu);text-align:center;margin:18px 6px}
 .ck{width:26px;height:26px;border:2px solid var(--mu);border-radius:7px;flex:none;display:flex;align-items:center;justify-content:center}.ck.on{background:var(--ok);border-color:var(--ok);color:#fff}
 .empty{text-align:center;padding:28px 10px;color:var(--mu)}
@@ -37,9 +37,10 @@ input,select,textarea{width:100%;padding:11px;border:1px solid var(--ln);border-
 .back{display:inline-block;color:var(--ac);text-decoration:none;margin:4px 0}
 .sheet{background:#fff;color:#000;border:1px solid var(--ln);padding:22px;border-radius:6px;max-width:210mm;margin:12px auto}.sheet h2{margin:0;font-size:26px;letter-spacing:.04em}.sheet h4{margin:18px 0 6px;font-size:13px;letter-spacing:.12em;border-bottom:1.5px solid #000;padding-bottom:3px}
 .kr{display:flex;gap:10px;align-items:center;padding:5px 0;font-size:15px}.bx{width:15px;height:15px;border:1.6px solid #000;flex:none;display:grid;place-items:center;font-size:12px;line-height:1;font-weight:700}.tot{margin-top:18px;border-top:1.5px solid #000;padding-top:8px;font-size:14px;font-weight:600}.kr em{margin-left:auto;font-style:normal;font-size:11px;letter-spacing:.08em;border:1px solid #000;padding:1px 6px}.kr em.m{background:#000;color:#fff}.kr em.w{border-style:dashed}
-.circ{display:flex;align-items:center;justify-content:center}.em{font-size:clamp(30px,10vw,50px);line-height:1}.ci{display:flex;align-items:center;justify-content:center;background:var(--circ)}.ci .em{font-size:26px}.ci img{width:100%;height:100%;border-radius:50%}.circ{background:none}
+.circ{display:flex;align-items:center;justify-content:center}.em{font-size:clamp(30px,10vw,50px);line-height:1}.ci{display:flex;align-items:center;justify-content:center;background:#d6e9f4}.ci .em{font-size:26px}.ci img{width:100%;height:100%;border-radius:50%}.circ{background:#d6e9f4}
+.seg button .s{font-weight:400;white-space:nowrap}
 .pg{display:none}
-@media print{body{background:#fff;padding:0}.tabs,.noprint{display:none!important}#app{max-width:none;padding:0}.sheet{border:0;padding:0;margin:0;max-width:none}.cat{break-inside:avoid}@page{size:A4;margin:16mm}.pg{display:block;text-align:center;font-size:11px;margin-top:14px}}
+@media print{html,body{height:auto!important;overflow:visible!important;display:block!important}#app{overflow:visible!important}body{background:#fff;padding:0}.tabs,.noprint{display:none!important}#app{max-width:none;padding:0}.sheet{border:0;padding:0;margin:0;max-width:none}.cat{break-inside:avoid}@page{size:A4;margin:16mm}.pg{display:block;text-align:center;font-size:11px;margin-top:14px}}
 </style></head><body><div id="app"></div><nav class="tabs" id="tabs"></nav>
 <script>
 const $=s=>document.querySelector(s),uid=()=>Math.random().toString(36).slice(2,9),now=()=>new Date().toISOString();
@@ -81,7 +82,7 @@ let S=Store.load();const save=()=>Store.save(S);
 const nm=i=>((i.brand?i.brand+' ':'')+i.model).trim();
 
 /* ---------- icons: illustrated images in /icons ---------- */
-const HAS={m:['activewear', 'footwear', 'hats-and-accessories', 'health-and-meds', 'jackets-and-coats', 'knitwear', 'nightwear', 'smart-and-evening', 'swimwear-and-beachwear', 'toiletries', 'tops', 'trousers-and-shorts', 'underwear-and-socks'],f:['activewear', 'dresses-and-skirts', 'footwear', 'hats-and-accessories', 'health-and-meds', 'jackets-and-coats', 'knitwear', 'nightwear', 'smart-and-evening', 'swimwear-and-beachwear', 'toiletries', 'tops', 'underwear-and-socks']};
+const HAS={m:['activewear', 'bags', 'footwear', 'hats-and-accessories', 'health-and-meds', 'jackets-and-coats', 'knitwear', 'nightwear', 'smart-and-evening', 'swimwear-and-beachwear', 'toiletries', 'tops', 'trousers-and-shorts', 'underwear-and-socks'],f:['activewear', 'bags', 'dresses-and-skirts', 'footwear', 'hats-and-accessories', 'health-and-meds', 'jackets-and-coats', 'knitwear', 'nightwear', 'smart-and-evening', 'swimwear-and-beachwear', 'toiletries', 'tops', 'underwear-and-socks']};
 const svg=c=>{const k=slug(c),st=S.settings.style=='f'?'f':'m',src=HAS[st].includes(k)?st+'-'+k:k=='trousers-and-shorts'?'m-'+k:null;return src?`<img src="icons/${src}.webp" alt="" decoding="async">`:`<span class="em">${EM[c]}</span>`};
 const vis=c=>!(c=='Dresses & Skirts'&&S.settings.style!='f'&&!cnt(S.inventory.filter(i=>i.category==c)));
 
@@ -94,7 +95,7 @@ const BN={d:'Hold bag',p:'Carry on',w:'Small bag'};
 const asg=t=>{t.as=t.as||{};t.pk=t.pk||[];for(const k of Object.keys(t.as)){let v=t.as[k];const g=S.inventory.find(x=>x.id==k);if(!g){delete t.as[k];continue}
 if(typeof v=='string'){if(!'dpw'.includes(v)||!v){delete t.as[k];continue}t.as[k]={[v]:qn(g)};t.pk=t.pk.map(x=>x==k?k+':'+v:x);v=t.as[k]}
 if(typeof v!='object'||!v){delete t.as[k];continue}for(const c of ['d','p','w'])if(!(v[c]>0))delete v[c];if(!Object.keys(v).length)delete t.as[k]}return t.as};
-const qn=g=>Math.max(1,parseInt(g.qty)||1),cnt=l=>l.reduce((s,g)=>s+qn(g),0),iw=g=>kg(g.g)*qn(g);const bagRows=(t,c)=>S.inventory.filter(g=>((asg(t)[g.id]||{})[c]||0)>0).map(g=>({g,n:t.as[g.id][c]})),bcnt=r=>r.reduce((s,x)=>s+x.n,0),wt=(t,c)=>bagRows(t,c).reduce((s,x)=>s+kg(x.g.g)*x.n,0),left=(t,g)=>qn(g)-Object.values((asg(t)[g.id])||{}).reduce((a,b)=>a+b,0),re=()=>{const y=scrollY;view();scrollTo(0,y)};
+const qn=g=>Math.max(1,parseInt(g.qty)||1),cnt=l=>l.reduce((s,g)=>s+qn(g),0),iw=g=>kg(g.g)*qn(g);const bagRows=(t,c)=>S.inventory.filter(g=>((asg(t)[g.id]||{})[c]||0)>0).map(g=>({g,n:t.as[g.id][c]})),bcnt=r=>r.reduce((s,x)=>s+x.n,0),wt=(t,c)=>bagRows(t,c).reduce((s,x)=>s+kg(x.g.g)*x.n,0),left=(t,g)=>qn(g)-Object.values((asg(t)[g.id])||{}).reduce((a,b)=>a+b,0),re=()=>{const y=$('#app').scrollTop;view();$('#app').scrollTop=y};
 let bag='d',cur=null,tm='assign',IMP=null;
 const fd=(a,b)=>{if(!a)return'';const f=(d,y)=>new Date(d+'T12:00').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:y?'numeric':undefined}),A=new Date(a+'T12:00'),B=b&&new Date(b+'T12:00');
 if(!b||b==a)return f(a,1);if(A.getMonth()==B.getMonth()&&A.getFullYear()==B.getFullYear())return A.getDate()+'–'+f(b,1);return f(a)+' – '+f(b,1)};
@@ -109,7 +110,7 @@ $('#app').className=p=='wall'?'wide':'';
 let html='';
 if(p=='wall')html=wallV();else if(p=='cat')html=catV(h[1]);else if(p=='item')html=itemV(h[1]);else if(p=='add')html=itemV(null,h[1]);else if(p=='settings')html=setV();else if(p=='import'){IMP=null;html=impV()}
 else if(p=='trips')html=tripsV();else if(p=='new')html=newV();else if(p=='edit')html=newV(T(h[1]));else if(p=='trip'){cur=h[1];html=tripV()}else if(p=='kit'){cur=h[1];html=kitV()}else html=wallV();
-$('#app').innerHTML=html;window.scrollTo(0,0)}
+$('#app').innerHTML=html;$('#app').scrollTop=0}
 function terms(){$('#tabs').innerHTML='';$('#app').innerHTML=`<h1 style="justify-content:center;margin-top:24px">Before you start</h1><div class="c">${[['Suggestions, not instructions','Packing lists, weights and allowance totals are suggestions to help you plan. They can be incomplete or wrong.'],['Not travel advice','Do not rely on this app for travel, customs, health or safety decisions.'],['Check the real rules','Always confirm baggage allowances, size limits, liquids rules and restricted items with your airline, airport and destination.'],['The decisions are yours','You are responsible for what you pack and carry. We take no liability for fees, delays, loss or damage arising from using the app.']].map(x=>`<div class="r"><div><b>${x[0]}</b><div class="s" style="font-size:14px">${x[1]}</div></div></div>`).join('')}</div>
 <label class="r c" style="margin-top:12px;gap:12px"><input type="checkbox" style="width:22px;margin:0" onchange="$('#go').disabled=!this.checked"><span>I've read and understand this, and I accept the full terms.</span></label>
 <p class="s">We save the date and version you accepted on this device.</p><button class="p big" id="go" disabled data-a="accept">Continue</button>`}
@@ -194,7 +195,7 @@ cv.toBlob(b=>{const f=new File([b],'packing-list.png',{type:'image/png'});if(nav
 
 /* ---------- actions ---------- */
 const A={
-accept(){S.settings.terms=TERMS;S.settings.termsDate=now();save();location.hash='/wall';view()},go(d){go(d.h)},back(){history.back()},style(d){S.settings.style=d.s;save();view()},preset(d){const t=T(cur),p=PRE[+d.k];t.maxKg=p[1];t.maxKgP=p[2];t.maxKgW=p[3];save();re()},tmode(d){tm=d.m;const y=scrollY;view();scrollTo(0,y)},print(){window.print()},img(){kitImg()},
+accept(){S.settings.terms=TERMS;S.settings.termsDate=now();save();location.hash='/wall';view()},go(d){go(d.h)},back(){history.back()},style(d){S.settings.style=d.s;save();re()},preset(d){const t=T(cur),p=PRE[+d.k];t.maxKg=p[1];t.maxKgP=p[2];t.maxKgW=p[3];save();re()},tmode(d){tm=d.m;const y=$('#app').scrollTop;view();$('#app').scrollTop=y},print(){window.print()},img(){kitImg()},
 saveg(d){const m=$('#m').value.trim();if(!m){alert('Model is required');return}const v={brand:$('#b').value.trim(),model:m,category:$('#c').value,g:+$('#g').value||null,qty:Math.max(1,parseInt($('#q').value)||1),updated_at:now()};
 if(d.id){Object.assign(S.inventory.find(x=>x.id==d.id),v)}else S.inventory.push({id:uid(),created_at:now(),...v});save();go('/cat/'+slug(v.category))},
 wipe(){if(!S.inventory.length){alert('Your Wardrobe is already empty');return}if(confirm('Delete all '+S.inventory.length+' items? This can\'t be undone unless you have a backup. Trips are kept.')){S.inventory=[];save();alert('All items deleted. You can now import a new CSV.');view()}},
@@ -204,7 +205,7 @@ doimp(){if(IMP.replace&&!confirm('This deletes your '+S.inventory.length+' curre
 mk(d){const n=$('#n').value.trim();if(!n){alert('Give the trip a name');return}const t=d.id?T(d.id):{id:uid(),as:{},pk:[],created_at:now()};Object.assign(t,{name:n,dest:$('#dst').value.trim(),env:$('#env').value,start:$('#sd').value,end:$('#ed').value,updated_at:now()});if(!d.id)S.trips.unshift(t);save();go('/trip/'+t.id)},
 as(d){const t=T(cur),m=asg(t),g=S.inventory.find(x=>x.id==d.id);if(!g)return;const had=m[d.id]&&m[d.id][d.b];t.pk=t.pk.filter(x=>x.split(':')[0]!=d.id);if(had)delete m[d.id];else m[d.id]={[d.b]:1};save();re()},
 adj(d){const t=T(cur),m=asg(t),g=S.inventory.find(x=>x.id==d.id);if(!g)return;const v=m[d.id]=m[d.id]||{},used=Object.values(v).reduce((a,b)=>a+b,0),n=v[d.b]||0,dl=+d.dl;if(dl>0&&used>=qn(g))return;const nn=Math.max(0,n+dl);if(nn)v[d.b]=nn;else{delete v[d.b];t.pk=t.pk.filter(x=>x!=d.id+':'+d.b)}if(!Object.keys(v).length)delete m[d.id];save();re()},
-tk(d){const t=T(cur),i=t.pk.indexOf(d.id);i<0?t.pk.push(d.id):t.pk.splice(i,1);save();const y=scrollY;view();scrollTo(0,y)},
+tk(d){const t=T(cur),i=t.pk.indexOf(d.id);i<0?t.pk.push(d.id):t.pk.splice(i,1);save();const y=$('#app').scrollTop;view();$('#app').scrollTop=y},
 delt(d){if(confirm('Delete this trip?')){S.trips=S.trips.filter(t=>t.id!=d.id);save();go('/trips')}},
 bk(){const j=JSON.stringify(S);(navigator.clipboard?navigator.clipboard.writeText(j):Promise.reject()).then(()=>alert('Backup copied')).catch(()=>{$('#rs').value=j;$('#rs').select();alert('Copy the text in the box')})},
 rest(){doRestore($('#rs').value)},
@@ -217,7 +218,7 @@ document.addEventListener('change',e=>{const t=e.target;if(t.id=='rf'&&t.files[0
 else if(t.id=='f'&&t.files[0]){t.files[0].text().then(x=>{startImp(x);$('#app').innerHTML=impR()})}
 else if(t.id=='rp'){IMP.replace=t.checked}
 else if(t.dataset.lim){const tr=T(cur);if(tr){tr[{d:'maxKg',p:'maxKgP',w:'maxKgW'}[t.dataset.lim]]=+t.value;save();re()}}
-else if(t.dataset.ch!==undefined){IMP.rows[+t.dataset.ch].cat=t.value||null;const y=scrollY;$('#app').innerHTML=impR();scrollTo(0,y)}});
+else if(t.dataset.ch!==undefined){IMP.rows[+t.dataset.ch].cat=t.value||null;const y=$('#app').scrollTop;$('#app').innerHTML=impR();$('#app').scrollTop=y}});
 addEventListener('hashchange',view);view();
 if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 </script></body></html>
