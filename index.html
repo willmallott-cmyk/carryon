@@ -1,0 +1,223 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Carryon</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.PNG">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Carryon"><meta name="theme-color" content="#f7f7f4">
+<style>
+:root{--bg:#f7f7f4;--cd:#fff;--tx:#1f3354;--mu:#66738a;--ln:#dfe5ea;--circ:#dce9f1;--ac:#e8731c;--acb:#fdeee0;--ok:#1f8a4c;--wn:#b45309;--wnb:#fef3c7;--bad:#c62828;--pri:#1f3354;--on:#fff}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1620;--cd:#162130;--tx:#eaf0f6;--mu:#9aa8ba;--ln:#263548;--circ:#1f3044;--ac:#f0954a;--acb:#3a2a1c;--ok:#4cc78b;--wn:#f2b24c;--wnb:#3a2f14;--bad:#ff7a73;--pri:#eaf0f6;--on:#0f1620}}
+*{box-sizing:border-box}body{margin:0;font:16px/1.4 -apple-system,system-ui,sans-serif;background:var(--bg);color:var(--tx);padding-top:env(safe-area-inset-top)}
+#app{max-width:640px;margin:auto;padding:12px 16px calc(88px + env(safe-area-inset-bottom))}#app.wide{max-width:960px}
+h1{font-size:26px;margin:8px 0 14px;display:flex;justify-content:space-between;align-items:center;gap:8px;letter-spacing:-.01em}h1 span{display:flex;gap:8px}
+h3{font-size:12px;color:var(--mu);font-weight:600;margin:20px 0 6px;text-transform:uppercase;letter-spacing:.06em}
+.c{background:var(--cd);border:1px solid var(--ln);border-radius:12px;overflow:hidden}.r{display:flex;gap:10px;align-items:center;padding:12px;border-top:1px solid var(--ln);min-height:48px}.r:first-child{border-top:0}.r>div{flex:1;min-width:0}
+.s{font-size:12px;color:var(--mu)}.w{color:var(--wn)}.b{color:var(--bad)}.o{color:var(--ok)}
+button,select,input,textarea{font:inherit;color:var(--tx)}button{min-height:44px;padding:0 14px;border-radius:12px;border:1px solid var(--ln);background:var(--cd);cursor:pointer;box-shadow:0 1px 2px rgba(20,38,66,.06)}
+button.p{background:linear-gradient(180deg,#31548a 0%,#1f3a63 100%);color:#fff;border:1px solid rgba(255,255,255,.14);font-weight:600;letter-spacing:.015em;border-radius:12px;padding:0 18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 8px 18px -8px rgba(20,38,66,.7);transition:transform .08s,filter .12s}button.p:active{transform:translateY(1px);filter:brightness(.93)}@media(prefers-color-scheme:dark){button.p{background:linear-gradient(180deg,#3d6299 0%,#27456f 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 8px 18px -8px rgba(0,0,0,.75)}}
+.steps{display:flex;gap:6px;width:100%}.stp{flex:1;text-align:center}.stp .s{display:block;margin-bottom:3px}.lim{width:auto;min-height:0;padding:1px 2px;margin:0;font-size:12px;border-radius:6px}
+.sc{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--ln);border-radius:10px;overflow:hidden;background:var(--cd)}.sc button{min-height:38px;width:36px;padding:0;border:0;box-shadow:none;border-radius:0;font-size:18px;background:none}.sc b{flex:1;font-size:15px}.stp.on .sc{border-color:var(--ac);background:var(--acb)}
+.pills{display:flex;gap:6px;flex:none}.pill{min-height:38px;padding:0 11px;font-size:13px;font-weight:600;border-radius:10px}.pill.pd.on{background:linear-gradient(180deg,#31548a,#1f3a63);color:#fff;border-color:transparent}.pill.pp.on{background:linear-gradient(180deg,#ea8a3c,#c9631a);color:#fff;border-color:transparent}
+.bags{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.bags .bagc{padding:8px 6px}.bagc .wgt{font-size:20px;font-weight:700}.bsvw{height:116px;margin-bottom:6px;display:flex;align-items:center;justify-content:center}.fi{position:relative;margin:0 auto}.fi img{position:absolute;left:0;top:0;width:100%;height:100%;display:block}.fi .gh{filter:grayscale(1) opacity(.3)}.fi .ov{filter:sepia(1) saturate(5) hue-rotate(-35deg)}.pill.pw.on{background:linear-gradient(180deg,#43977f,#2b6e5b);color:#fff;border-color:transparent}.ar{flex-wrap:wrap}.ar>div:first-child{flex:1 1 100%}.ar .pills{width:100%}.ar .pill{flex:1}.bagc{padding:12px}
+h1 button,.empty button{min-height:36px;padding:0 13px;font-size:14px;border-radius:10px}h1 button.p svg,.empty button.p svg{width:12px;height:12px;margin-right:5px!important}
+button.l{border:0;background:none;color:var(--ac);padding:0 6px;min-height:36px}button.big{width:100%;min-height:48px;margin-top:12px}button:disabled{opacity:.4}
+input,select,textarea{width:100%;padding:11px;border:1px solid var(--ln);border-radius:10px;background:var(--cd);margin:4px 0}textarea{min-height:120px}
+.bar{height:7px;background:var(--ln);border-radius:4px;overflow:hidden;margin:8px 0 4px}.bar i{display:block;height:100%;background:var(--pri)}
+.seg{display:flex;gap:6px;margin:8px 0}.seg button{flex:1}.seg .on{background:var(--acb);border-color:var(--ac);color:var(--ac);font-weight:600}
+.tabs{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--cd);border-top:1px solid var(--ln);padding-bottom:env(safe-area-inset-bottom)}.tabs a{flex:1;text-align:center;padding:13px 0;color:var(--mu);text-decoration:none;font-size:13px}.tabs a.on{color:var(--ac);font-weight:600}
+.warn{background:var(--wnb);color:var(--wn);padding:9px 12px;border-radius:10px;font-size:14px;margin-bottom:8px}.ft{font-size:12px;color:var(--mu);text-align:center;margin:18px 6px}
+.ck{width:26px;height:26px;border:2px solid var(--mu);border-radius:7px;flex:none;display:flex;align-items:center;justify-content:center}.ck.on{background:var(--ok);border-color:var(--ok);color:#fff}
+.empty{text-align:center;padding:28px 10px;color:var(--mu)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 8px;margin-top:6px}@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr);gap:30px 22px}}
+.bk{text-decoration:none;color:var(--tx);text-align:center;display:block;-webkit-tap-highlight-color:transparent}
+.circ{width:92%;margin:0 auto;aspect-ratio:1;border-radius:50%;background:var(--circ);overflow:hidden;box-shadow:0 0 0 2px transparent;transition:box-shadow .15s}.bk:active .circ,.bk:hover .circ{box-shadow:0 0 0 2px var(--ac)}
+.circ img{width:100%;height:100%;display:block;border-radius:50%}.bk b{display:block;margin-top:7px;font-size:10px;line-height:1.25;letter-spacing:.05em;text-transform:uppercase;font-weight:600}.bk .s{display:block;margin-top:2px}
+.bk.has .s{color:var(--ac)}.bk .s{font-size:11px}@media(min-width:700px){.circ{width:72%}.bk b{font-size:12px;letter-spacing:.1em;margin-top:9px}.bk .s{font-size:12px}}
+.back{display:inline-block;color:var(--ac);text-decoration:none;margin:4px 0}
+.sheet{background:#fff;color:#000;border:1px solid var(--ln);padding:22px;border-radius:6px;max-width:210mm;margin:12px auto}.sheet h2{margin:0;font-size:26px;letter-spacing:.04em}.sheet h4{margin:18px 0 6px;font-size:13px;letter-spacing:.12em;border-bottom:1.5px solid #000;padding-bottom:3px}
+.kr{display:flex;gap:10px;align-items:center;padding:5px 0;font-size:15px}.bx{width:15px;height:15px;border:1.6px solid #000;flex:none;display:grid;place-items:center;font-size:12px;line-height:1;font-weight:700}.tot{margin-top:18px;border-top:1.5px solid #000;padding-top:8px;font-size:14px;font-weight:600}.kr em{margin-left:auto;font-style:normal;font-size:11px;letter-spacing:.08em;border:1px solid #000;padding:1px 6px}.kr em.m{background:#000;color:#fff}.kr em.w{border-style:dashed}
+.circ{display:flex;align-items:center;justify-content:center}.em{font-size:clamp(30px,10vw,50px);line-height:1}.ci{display:flex;align-items:center;justify-content:center;background:var(--circ)}.ci .em{font-size:26px}.ci img{width:100%;height:100%;border-radius:50%}.circ{background:none}
+.pg{display:none}
+@media print{body{background:#fff;padding:0}.tabs,.noprint{display:none!important}#app{max-width:none;padding:0}.sheet{border:0;padding:0;margin:0;max-width:none}.cat{break-inside:avoid}@page{size:A4;margin:16mm}.pg{display:block;text-align:center;font-size:11px;margin-top:14px}}
+</style></head><body><div id="app"></div><nav class="tabs" id="tabs"></nav>
+<script>
+const $=s=>document.querySelector(s),uid=()=>Math.random().toString(36).slice(2,9),now=()=>new Date().toISOString();
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const TERMS='carryon-2026-10-v1';
+const CATS=['Tops','Knitwear','Jackets & Coats','Dresses & Skirts','Trousers & Shorts','Smart & Evening','Swimwear & Beachwear','Activewear','Nightwear','Underwear & Socks','Hats & Accessories','Footwear','Toiletries','Health & Meds','Electronics','Bags','Other','Wish List'];
+const EM={'Tops':'👕','Knitwear':'🧶','Jackets & Coats':'🧥','Dresses & Skirts':'👗','Trousers & Shorts':'👖','Smart & Evening':'👔','Swimwear & Beachwear':'👙','Activewear':'🩳','Nightwear':'🌙','Underwear & Socks':'🧦','Hats & Accessories':'👒','Footwear':'👟','Toiletries':'🧴','Health & Meds':'💊','Electronics':'🔌','Bags':'🧳','Other':'📦','Wish List':'⭐'};
+const WORN=['Tops','Knitwear','Jackets & Coats','Dresses & Skirts','Trousers & Shorts','Smart & Evening','Swimwear & Beachwear','Activewear','Nightwear','Underwear & Socks','Hats & Accessories','Footwear'];
+const slug=c=>c.toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''),bySlug=s=>CATS.find(c=>slug(c)==s);
+const norm=s=>String(s).toLowerCase().replace(/[^a-z]/g,'').replace(/s$/,'');
+const CMAP=Object.fromEntries(CATS.map(c=>[norm(c),c]));[['top,tshirt,shirt,blouse','Tops'],['jumper,sweater,cardigan,hoodie,fleece','Knitwear'],['jacket,coat,raincoat','Jackets & Coats'],['dress,skirt','Dresses & Skirts'],['trouser,short,jeans,bottom,legwear','Trousers & Shorts'],['smart,evening,formal','Smart & Evening'],['swimwear,beachwear,swim','Swimwear & Beachwear'],['gym,sportswear','Activewear'],['pyjama,sleepwear,nightwear','Nightwear'],['underwear,sock,socks','Underwear & Socks'],['hat,accessory,accessories,hatsandaccessories','Hats & Accessories'],['shoe,shoes','Footwear'],['toiletry,toiletries,washbag','Toiletries'],['health,medication,medicine,meds,firstaid','Health & Meds'],['bag,luggage,suitcase','Bags']].forEach(([k,v])=>k.split(',').forEach(x=>CMAP[norm(x)]=v));
+const OLDCAT={};
+function guess(t){t=String(t).toLowerCase();const h=r=>r.test(t);
+return h(/toothpaste|toothbrush|shampoo|conditioner|shower|deodorant|razor|soap|face ?wash|moistur|sunscreen|suncream|spf|perfume|cologne|mascara|make-?up|lipstick|floss|hairbrush|comb|tampon|contact lens|wash ?bag|toiletr/)?'Toiletries'
+:h(/plaster|paracetamol|ibuprofen|medic|antihistamine|first aid|prescription|inhaler|repellent|rehydrat/)?'Health & Meds'
+:h(/swim|bikini|trunks|sarong|beach|rash ?vest/)?'Swimwear & Beachwear'
+:h(/pyjama|pajama|nightie|nightdress|dressing gown|robe/)?'Nightwear'
+:h(/activewear|gym|yoga|running|sports|athletic|legging/)?'Activewear'
+:h(/underwear|boxers?|briefs?|knickers?|\bbras?\b|socks?|tights/)?'Underwear & Socks'
+:h(/dress|skirt|jumpsuit|playsuit/)?'Dresses & Skirts'
+:h(/jacket|coat|parka|blazer|gilet|puffer|anorak|windbreaker/)?'Jackets & Coats'
+:h(/jumper|sweater|cardigan|hoodie|fleece|knit|sweatshirt/)?'Knitwear'
+:h(/\bsuit\b|\btie\b|evening|gown|formal/)?'Smart & Evening'
+:h(/trouser|jeans|shorts|chinos|joggers|\bpants\b/)?'Trousers & Shorts'
+:h(/t-?shirt|\btee\b|shirt|blouse|\btop\b|vest|polo|tank/)?'Tops'
+:h(/\bhat\b|\bcap\b|beanie|sunglass|scarf|glove|belt|watch|jewel|bandana|umbrella/)?'Hats & Accessories'
+:h(/shoe|boot|sandal|flip-?flop|trainer|slipper|heels?/)?'Footwear'
+:h(/phone|charger|power ?bank|adapter|battery|cable|camera|earbud|headphone|speaker|kindle|ipad|laptop/)?'Electronics'
+:h(/suitcase|luggage|backpack|rucksack|holdall|duffle|tote|\bbag\b/)?'Bags':'Other'}
+
+/* ---------- storage layer (swap this for a cloud store later) ---------- */
+const Store={K:'carryon.v1',OLD:'carryon.v0',
+load(){let d=null;try{d=JSON.parse(localStorage.getItem(this.K))}catch(e){}if(d&&d.v==2){let ch=0;(d.inventory||[]).forEach(i=>{if(OLDCAT[i.category]){i.category=OLDCAT[i.category];ch=1}});if(ch)this.save(d);return d}
+try{const o=JSON.parse(localStorage.getItem(this.OLD));if(o)return this.migrate(o)}catch(e){}
+return{v:2,inventory:[],trips:[],settings:{terms:'',termsDate:''}}},
+migrate(o){const t=now();const d={v:2,inventory:(o.gear||[]).map(g=>({id:g.id,model:g.name,brand:'',category:guess(g.name),g:g.g||null,created_at:t,updated_at:t})),trips:(o.trips||[]),settings:{terms:o.terms||'',termsDate:o.termsDate||''}};localStorage.setItem(this.K,JSON.stringify(d));return d},
+save(d){localStorage.setItem(this.K,JSON.stringify(d))}};
+let S=Store.load();const save=()=>Store.save(S);
+const nm=i=>((i.brand?i.brand+' ':'')+i.model).trim();
+
+/* ---------- icons: illustrated images in /icons ---------- */
+const HAS={m:['activewear', 'footwear', 'hats-and-accessories', 'health-and-meds', 'jackets-and-coats', 'knitwear', 'nightwear', 'smart-and-evening', 'swimwear-and-beachwear', 'toiletries', 'tops', 'trousers-and-shorts', 'underwear-and-socks'],f:['activewear', 'dresses-and-skirts', 'footwear', 'hats-and-accessories', 'health-and-meds', 'jackets-and-coats', 'knitwear', 'nightwear', 'smart-and-evening', 'swimwear-and-beachwear', 'toiletries', 'tops', 'underwear-and-socks']};
+const svg=c=>{const k=slug(c),st=S.settings.style=='f'?'f':'m',src=HAS[st].includes(k)?st+'-'+k:k=='trousers-and-shorts'?'m-'+k:null;return src?`<img src="icons/${src}.webp" alt="" decoding="async">`:`<span class="em">${EM[c]}</span>`};
+const vis=c=>!(c=='Dresses & Skirts'&&S.settings.style!='f'&&!cnt(S.inventory.filter(i=>i.category==c)));
+
+/* ---------- trips: assign gear to duffle / backpack ---------- */
+const kg=g=>(g||0)/1000,fmt=n=>n.toFixed(1)+' kg';
+const FT='<p class="ft">Suggestions only. Always check your airline and airport baggage rules, and do not rely on this app for travel or safety decisions. Your data is stored only in this browser on this device; it is not backed up or synced.</p>';
+const T=id=>S.trips.find(t=>t.id==id);
+const ENVS=['Beach','City break','Ski','Cruise','Countryside','Road trip','Business','Festival','Camping','Other'];
+const BN={d:'Checked',p:'Cabin',w:'Worn'};
+const asg=t=>{t.as=t.as||{};t.pk=t.pk||[];for(const k of Object.keys(t.as)){let v=t.as[k];const g=S.inventory.find(x=>x.id==k);if(!g){delete t.as[k];continue}
+if(typeof v=='string'){if(!'dpw'.includes(v)||!v){delete t.as[k];continue}t.as[k]={[v]:qn(g)};t.pk=t.pk.map(x=>x==k?k+':'+v:x);v=t.as[k]}
+if(typeof v!='object'||!v){delete t.as[k];continue}for(const c of ['d','p','w'])if(!(v[c]>0))delete v[c];if(!Object.keys(v).length)delete t.as[k]}return t.as};
+const qn=g=>Math.max(1,parseInt(g.qty)||1),cnt=l=>l.reduce((s,g)=>s+qn(g),0),iw=g=>kg(g.g)*qn(g);const bagRows=(t,c)=>S.inventory.filter(g=>((asg(t)[g.id]||{})[c]||0)>0).map(g=>({g,n:t.as[g.id][c]})),bcnt=r=>r.reduce((s,x)=>s+x.n,0),wt=(t,c)=>bagRows(t,c).reduce((s,x)=>s+kg(x.g.g)*x.n,0),left=(t,g)=>qn(g)-Object.values((asg(t)[g.id])||{}).reduce((a,b)=>a+b,0),re=()=>{const y=scrollY;view();scrollTo(0,y)};
+let bag='d',cur=null,tm='assign',IMP=null;
+const fd=(a,b)=>{if(!a)return'';const f=(d,y)=>new Date(d+'T12:00').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:y?'numeric':undefined}),A=new Date(a+'T12:00'),B=b&&new Date(b+'T12:00');
+if(!b||b==a)return f(a,1);if(A.getMonth()==B.getMonth()&&A.getFullYear()==B.getFullYear())return A.getDate()+'–'+f(b,1);return f(a)+' – '+f(b,1)};
+
+/* ---------- views ---------- */
+const go=h=>location.hash=h;
+function view(){const h=location.hash.slice(2).split('/'),p=h[0]||'wall';
+if(S.settings.terms!=TERMS)return terms();
+const tab=x=>['wall','cat','item','add'].includes(p)?x=='g':['trips','trip','new','edit','kit'].includes(p)?x=='t':x=='s';
+$('#tabs').innerHTML=`<a href="#/wall" class="${tab('g')?'on':''}">Wardrobe</a><a href="#/trips" class="${tab('t')?'on':''}">Trips</a><a href="#/settings" class="${tab('s')?'on':''}">Settings</a>`;
+$('#app').className=p=='wall'?'wide':'';
+let html='';
+if(p=='wall')html=wallV();else if(p=='cat')html=catV(h[1]);else if(p=='item')html=itemV(h[1]);else if(p=='add')html=itemV(null,h[1]);else if(p=='settings')html=setV();else if(p=='import'){IMP=null;html=impV()}
+else if(p=='trips')html=tripsV();else if(p=='new')html=newV();else if(p=='edit')html=newV(T(h[1]));else if(p=='trip'){cur=h[1];html=tripV()}else if(p=='kit'){cur=h[1];html=kitV()}else html=wallV();
+$('#app').innerHTML=html;window.scrollTo(0,0)}
+function terms(){$('#tabs').innerHTML='';$('#app').innerHTML=`<h1 style="justify-content:center;margin-top:24px">Before you start</h1><div class="c">${[['Suggestions, not instructions','Packing lists, weights and allowance totals are suggestions to help you plan. They can be incomplete or wrong.'],['Not travel advice','Do not rely on this app for travel, customs, health or safety decisions.'],['Check the real rules','Always confirm baggage allowances, size limits, liquids rules and restricted items with your airline, airport and destination.'],['The decisions are yours','You are responsible for what you pack and carry. We take no liability for fees, delays, loss or damage arising from using the app.']].map(x=>`<div class="r"><div><b>${x[0]}</b><div class="s" style="font-size:14px">${x[1]}</div></div></div>`).join('')}</div>
+<label class="r c" style="margin-top:12px;gap:12px"><input type="checkbox" style="width:22px;margin:0" onchange="$('#go').disabled=!this.checked"><span>I've read and understand this, and I accept the full terms.</span></label>
+<p class="s">We save the date and version you accepted on this device.</p><button class="p big" id="go" disabled data-a="accept">Continue</button>`}
+function wallV(){const n=c=>cnt(S.inventory.filter(i=>i.category==c));
+return `<h1>Wardrobe<button class="p" data-a="go" data-h="/add">${PLUS}Add item</button></h1><div class="s">${cnt(S.inventory.filter(i=>i.category!='Wish List'))} ${cnt(S.inventory.filter(i=>i.category!='Wish List'))==1?'item':'items'} owned</div>
+<div class="grid">${CATS.filter(vis).map(c=>`<a class="bk ${n(c)?'has':''}" href="#/cat/${slug(c)}"><div class="circ">${svg(c)}</div><b>${c}</b><span class="s">${n(c)?n(c)+(n(c)==1?' item':' items'):'Empty'}</span></a>`).join('')}</div>`+
+(S.inventory.length?'':`<div class="empty"><b>Your Wardrobe is empty</b><p>Import a CSV of what you own, or add items one at a time.</p><button class="p" data-a="go" data-h="/import">Import CSV</button> <button data-a="go" data-h="/add">Add one item</button></div>`)+FT}
+function catV(s){const c=bySlug(s);if(!c)return wallV();const l=S.inventory.filter(i=>i.category==c).sort((a,b)=>nm(a).localeCompare(nm(b)));
+return `<a class="back" href="#/wall">‹ Wardrobe</a><h1><span style="gap:12px"><span class="ci" style="width:48px;height:48px;border-radius:50%;overflow:hidden">${svg(c)}</span>${c}</span><button class="p" data-a="go" data-h="/add/${s}">${PLUS}Add</button></h1>`+
+(l.length?`<div class="c">${l.map(i=>`<div class="r" data-a="go" data-h="/item/${i.id}" style="cursor:pointer"><div><div class="s">${esc(i.brand)||'No brand'}</div><b style="font-weight:600">${esc(i.model)}</b>${qn(i)>1?` <span class="s">×${qn(i)}</span>`:''}<div class="s">${i.category}</div></div><span class="s">${i.g?fmt(kg(i.g))+(qn(i)>1?' each':''):''}</span><span class="s">›</span></div>`).join('')}</div>`:`<div class="empty"><b>Nothing in ${c} yet</b><p>Add an item or import a CSV.</p></div>`)+FT}
+function itemV(id,cs){const i=id?S.inventory.find(x=>x.id==id):null;if(id&&!i)return wallV();const cat=i?i.category:(bySlug(cs)||'Other');
+return `<a class="back" href="#/${i?'cat/'+slug(i.category):cs?'cat/'+cs:'wall'}">‹ Back</a><h1>${i?'Edit item':'Add item'}</h1><div class="c" style="padding:12px"><label class="s">Brand (optional)</label><input id="b" value="${esc(i?.brand)}"><label class="s">Model</label><input id="m" value="${esc(i?.model)}"><label class="s">Category</label><select id="c">${CATS.map(c=>`<option ${c==cat?'selected':''}>${c}</option>`).join('')}</select><label class="s">Quantity owned</label><input id="q" type="number" inputmode="numeric" min="1" value="${i?qn(i):1}"><label class="s">Weight of one, in grams (optional)</label><input id="g" type="number" inputmode="numeric" value="${i?.g||''}"></div>
+<button class="p big" data-a="saveg" data-id="${id||''}">Save</button>${i?`<button class="big" data-a="dup" data-id="${id}">Duplicate this item</button><button class="big" data-a="delg" data-id="${id}">Delete</button>`:''}<button class="big" data-a="back">Cancel</button>`}
+function setV(){const st=S.settings.style=='f'?'f':'m';return `<h1>Settings</h1><h3 style="margin-top:0">Icon style</h3><div class="seg"><button class="${st=='m'?'on':''}" data-a="style" data-s="m">Men's</button><button class="${st=='f'?'on':''}" data-a="style" data-s="f">Women's</button></div><p class="s" style="margin:0 0 14px">Changes the clothing illustrations on your Wardrobe. Women's adds Dresses &amp; Skirts; Men's hides it until you use it.</p><div class="c"><div class="r" data-a="go" data-h="/import" style="cursor:pointer"><div><b style="font-weight:600">Import CSV</b><div class="s">Columns: Model, Brand, Category (optional Quantity, Weight)</div></div><span class="s">›</span></div></div>
+<h3>Wardrobe data</h3><div class="c" style="padding:12px"><p class="s" style="margin-top:0">Remove every item from your Wardrobe so you can import a fresh CSV. Your trips are kept. Tip: copy a backup first.</p><button class="b" data-a="wipe">Delete all items (${S.inventory.length} ${S.inventory.length==1?'item':'items'})</button></div><h3>Export / Backup</h3><div class="c" style="padding:12px"><p class="s" style="margin-top:0">Your data lives only in this browser on this device. It isn't synced or backed up. Copy a backup now and then.</p><div class="pills" style="flex-wrap:wrap"><button class="p" data-a="dl">Download backup file</button><button data-a="bk">Copy backup</button></div><h3 style="margin-top:16px">Restore</h3><label class="s">From a backup file</label><input type="file" id="rf" accept=".json,application/json,text/plain"><label class="s">Or paste a copied backup</label><textarea id="rs" placeholder="Paste a backup here to restore" style="min-height:70px"></textarea><button data-a="rest">Restore from pasted text</button></div>`+FT}
+function impV(){if(IMP)return impR();return `<a class="back" href="#/settings">‹ Settings</a><h1>Import CSV</h1><p class="s">The first row must be exactly: <b>Model,Brand,Category</b>. Optional columns: <b>Quantity</b> and <b>Weight</b> (grams, or e.g. 0.45kg). A blank weight is imported as 0 g. Category should be a Wardrobe category (e.g. Tops, Footwear, Toiletries). Brand can be left blank.</p><div class="c" style="padding:12px"><input type="file" id="f" accept=".csv,text/csv"></div><p class="s">Nothing is imported until you confirm the preview.</p>`+FT}
+function csv(t){t=t.replace(/^\uFEFF/,'');const R=[];let r=[],f='',q=0;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c=='"'){if(t[i+1]=='"'){f+='"';i++}else q=0}else f+=c}else if(c=='"')q=1;else if(c==','){r.push(f);f=''}else if(c=='\n'||c=='\r'){if(c=='\r'&&t[i+1]=='\n')i++;r.push(f);f='';R.push(r);r=[]}else f+=c}
+if(f!=''||r.length){r.push(f);R.push(r)}return R.filter(r=>r.some(x=>x.trim()))}
+function startImp(text){const R=csv(text),H=(R[0]||[]).map(x=>x.trim().toLowerCase()),ix=['model','brand','category'].map(k=>H.indexOf(k)),qi=H.indexOf('quantity')>=0?H.indexOf('quantity'):H.indexOf('qty'),wi=H.findIndex(x=>/^weight/.test(x));
+if(ix.includes(-1)){IMP={bad:'Header row must contain exactly Model, Brand and Category. Found: '+esc((R[0]||[]).join(', ')||'nothing')};return}
+IMP={rows:R.slice(1).map((r,n)=>{const model=(r[ix[0]]||'').trim(),brand=(r[ix[1]]||'').trim(),raw=(r[ix[2]]||'').trim(),err=[];if(!model)err.push('Model is missing');if(!raw)err.push('Category is missing');
+let w=0;const wr=wi>=0?(r[wi]||'').trim():'';if(wr){const mm=wr.replace(/,/g,'').match(/^(\d+(?:\.\d+)?)\s*(kg|g)?$/i);if(!mm)err.push('Weight isn\'t a number');else w=Math.round(parseFloat(mm[1])*(/kg/i.test(mm[2]||'')?1000:1))}
+return{n:n+2,model,brand,raw,err,w,qty:qi>=0?Math.max(1,parseInt(r[qi])||1):1,cat:CMAP[norm(raw)]||null}})}}
+function impR(){if(IMP.bad)return `<a class="back" href="#/import">‹ Back</a><h1>Import CSV</h1><div class="warn">${IMP.bad}</div><button class="big" data-a="go" data-h="/import">Choose another file</button>`;
+const R=IMP.rows,inv=R.filter(r=>r.err.length),fix=R.filter(r=>!r.err.length&&!r.cat),ok=R.filter(r=>!r.err.length&&r.cat&&r.cat!='-'),sk=R.filter(r=>r.cat=='-');
+return `<a class="back" href="#/import">‹ Back</a><h1>Preview</h1><div class="c" style="padding:12px"><b class="o">${ok.length} valid</b> · <b class="${inv.length?'b':''}">${inv.length} invalid</b> · <b class="${fix.length?'w':''}">${fix.length} need a category</b>${sk.length?` · ${sk.length} skipped`:''}</div>
+${fix.length?'<div class="warn" style="margin-top:8px">Some categories aren\'t recognised. Pick one for each, or skip the row.</div>':''}
+<div class="c" style="margin-top:8px">${R.map((r,i)=>`<div class="r"><div><b style="font-weight:600">${esc(r.brand)} ${esc(r.model)}</b><div class="s">Row ${r.n}${r.w?' · '+r.w+' g':''}${r.err.length?` · <span class="b">${r.err.join(', ')}</span>`:r.cat?` → <b>${r.cat=='-'?'Skipped':r.cat}</b>`:''}</div>${!r.err.length&&!r.cat?`<select data-ch="${i}"><option value="">Choose category… ("${esc(r.raw)}")</option>${CATS.map(c=>`<option>${c}</option>`).join('')}<option value="-">Skip this row</option></select>`:''}</div></div>`).join('')}</div>
+<label class="r c" style="margin-top:10px;gap:12px"><input type="checkbox" id="rp" style="width:22px;margin:0" ${IMP.replace?'checked':''}><span>Replace my current gear (${S.inventory.length} ${S.inventory.length==1?'item':'items'}) with this import</span></label><button class="p big" data-a="doimp" ${fix.length||!ok.length?'disabled':''}>Import ${ok.length} ${ok.length==1?'item':'items'}</button>${inv.length?'<p class="s">Invalid rows will be left out.</p>':''}<button class="big" data-a="go" data-h="/settings">Cancel</button>`}
+const PLUS='<svg viewBox="0 0 16 16" width="14" height="14" style="margin-right:7px;vertical-align:-1px"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+const byName=(a,b)=>nm(a).localeCompare(nm(b));
+const tmeta=t=>[t.dest,t.env,fd(t.start,t.end)].filter(Boolean).map(esc).join(' · ');
+const FI={d:{img:'trip-suitcase',asp:0.8,w:88},p:{img:'trip-cabin',asp:0.8,w:66}};
+const PRE=[['Cabin only',0,10],['Standard',23,8],['Generous',30,10]];
+const bagSvg=(c,f,over)=>{const b=FI[c],y=(1-Math.max(0,Math.min(1,f)))*100;return `<div class="bsvw"><div class="fi" style="width:min(${b.w}px,100%);aspect-ratio:${b.asp}"><img class="gh" src="icons/${b.img}.webp" alt=""><img class="cl${over?' ov':''}" src="icons/${b.img}.webp" alt="" style="clip-path:inset(${y}% 0 0 0)"></div></div>`};
+const LEGRE=/\b(trousers?|pants|bibs?|leggings?|tights|bottoms?|salopettes?|overtrousers?|shorts|long ?johns?)\b/i,GLRE=/\b(gloves?|gauntlets?|mitts?|mittens?)\b/i,HTRE=/\b(hats?|beanies?|caps?|buffs?|balaclavas?|headbands?|toques?|visors?|sunhats?)\b/i;
+const wornRegions=t=>{const r={other:0};bagRows(t,'w').forEach(({g})=>{if(!WORN.includes(g.category))r.other++});return r};
+const personSvg=()=>`<div class="bsvw"><div class="fi" style="width:min(108px,100%);aspect-ratio:0.9125"><img src="icons/worn-jacket.webp" alt=""></div></div>`;
+function tripsV(){return `<h1>Trips<button class="p" data-a="go" data-h="/new">${PLUS}New trip</button></h1>`+(S.trips.length?`<div class="c">${S.trips.map(t=>{asg(t);const nd=bcnt(bagRows(t,'d')),np=bcnt(bagRows(t,'p')),nw=bcnt(bagRows(t,'w'));return `<a class="r" href="#/trip/${t.id}" style="text-decoration:none;color:inherit"><div><b>${esc(t.name)}</b><div class="s">${tmeta(t)||'No details yet'}</div><div class="s">Checked ${nd} · ${fmt(wt(t,'d'))} &nbsp; Cabin ${np} · ${fmt(wt(t,'p'))} &nbsp; Worn ${nw} · ${fmt(wt(t,'w'))}</div></div><span class="s">›</span></a>`}).join('')}</div>`:`<div class="empty"><b>No trips yet</b><p>Create a trip, set your luggage allowance, then assign your items to your bags.</p><button class="p" data-a="go" data-h="/new">${PLUS}New trip</button></div>`)+FT}
+function newV(t){t=t||{};return `<a class="back" href="#/${t.id?'trip/'+t.id:'trips'}">‹ Back</a><h1>${t.id?'Edit trip':'New trip'}</h1><div class="c" style="padding:12px"><label class="s">Trip name</label><input id="n" placeholder="e.g. Lisbon in May" value="${esc(t.name)}"><label class="s">Destination (optional)</label><input id="dst" value="${esc(t.dest)}"><label class="s">Trip type</label><select id="env"><option value="">Not set</option>${ENVS.map(e=>`<option ${e==t.env?'selected':''}>${e}</option>`).join('')}</select><label class="s">Start date (optional)</label><input id="sd" type="date" value="${esc(t.start)}"><label class="s">End date (optional)</label><input id="ed" type="date" value="${esc(t.end)}"></div><button class="p big" data-a="mk" data-id="${t.id||''}">${t.id?'Save trip':'Create trip'}</button><button class="big" data-a="back">Cancel</button>`+FT}
+function tripV(){const t=T(cur);if(!t)return tripsV();asg(t);save();
+const owned=S.inventory.filter(i=>i.category!='Wish List');
+const LIMS=[0,5,7,8,10,12,15,20,23,25,28,30,32],limOf=(t,c)=>c=='d'?(t.maxKg==null?23:t.maxKg):c=='p'?(t.maxKgP==null?8:t.maxKgP):0;
+const card=c=>{const l=bagRows(t,c),w=wt(t,c),n=bcnt(l),lim=limOf(t,c)||null,nb=c!='w'&&limOf(t,c)===0;
+const f=c=='w'?0:lim?w/lim:Math.min(1,n/(c=='d'?20:12)),over=nb?n>0:lim&&w>lim,wr=c=='w'?wornRegions(t):null;
+return `<div class="c bagc">${c=='w'?personSvg():bagSvg(c,f,over)}<div class="s">${BN[c]}</div><div class="wgt">${fmt(w)}</div><div class="s">${n} ${n==1?'item':'items'}</div>${c=='w'?'':`<div class="s">Max <select class="lim" data-lim="${c}">${LIMS.map(v=>`<option value="${v}" ${v==limOf(t,c)?'selected':''}>${v?v+' kg':'No bag'}</option>`).join('')}</select></div>`}${c=='w'&&wr.other?`<div class="s">+${wr.other} other</div>`:''}${nb&&n?`<div class="s b">No allowance, move ${n==1?'it':'these'}</div>`:''}${lim?`<div class="bar"><i style="width:${Math.min(100,w/lim*100)}%;${over?'background:var(--bad)':''}"></i></div>${over?`<div class="s b">Over by ${fmt(w-lim)}</div>`:''}`:''}${l.some(x=>!x.g.g)?'<div class="s">Some items have no weight</div>':''}</div>`};
+const tick=(x,c)=>{const k=x.g.id+':'+c,on=t.pk.includes(k);return `<div class="r" data-a="tk" data-id="${k}" style="cursor:pointer"><span class="ck ${on?'on':''}">${on?'✓':''}</span><div>${esc(nm(x.g))}${x.n>1?' ×'+x.n:''}<div class="s">${x.g.category}${x.g.g?' · '+fmt(kg(x.g.g)*x.n):''}</div></div></div>`};
+const arow=g=>{const v=t.as[g.id]||{},q=qn(g),lf=left(t,g),unit=g.g?fmt(kg(g.g))+(q>1?' each':''):'';
+const info=`<div class="s">${q>1?'×'+q+' owned · '+lf+' unassigned':''}${q>1&&unit?' · ':''}${unit}</div>`;
+if(q==1)return `<div class="r ar"><div><div>${esc(nm(g))}</div>${unit?info:''}</div><div class="pills">${['d','p','w'].map(c=>`<button class="pill p${c} ${v[c]?'on':''}" data-a="as" data-id="${g.id}" data-b="${c}">${BN[c]}</button>`).join('')}</div></div>`;
+return `<div class="r ar"><div><div>${esc(nm(g))}</div>${info}</div><div class="steps">${['d','p','w'].map(c=>`<div class="stp ${v[c]?'on':''}"><span class="s">${BN[c]}</span><div class="sc"><button data-a="adj" data-id="${g.id}" data-b="${c}" data-dl="-1">−</button><b>${v[c]||0}</b><button data-a="adj" data-id="${g.id}" data-b="${c}" data-dl="1">+</button></div></div>`).join('')}</div></div>`};
+let body;
+if(!owned.length)body=`<div class="empty"><b>Nothing here yet</b><p>Add items to your Wardrobe first, then assign them here.</p><button class="p" data-a="go" data-h="/import">Import CSV</button> <button data-a="go" data-h="/add">Add one item</button></div>`;
+else if(tm=='assign')body=CATS.filter(c=>c!='Wish List'&&owned.some(i=>i.category==c)).map(c=>`<h3>${c}</h3><div class="c">${owned.filter(i=>i.category==c).sort(byName).map(arow).join('')}</div>`).join('');
+else body=['d','p','w'].map(c=>{const l=bagRows(t,c).sort((a,b)=>byName(a.g,b.g));return `<h3>${BN[c]} · ${l.filter(x=>t.pk.includes(x.g.id+':'+c)).length} of ${l.length} packed</h3><div class="c">${l.length?l.map(x=>tick(x,c)).join(''):'<div class="r s">Nothing assigned yet</div>'}</div>`}).join('');
+return `<a class="back" href="#/trips">‹ Trips</a><h1 style="font-size:22px">${esc(t.name)}<button data-a="go" data-h="/edit/${t.id}">Edit</button></h1><div class="s" style="margin:-8px 0 10px">${tmeta(t)}</div>
+<button class="p big" style="margin:0 0 12px" data-a="go" data-h="/kit/${t.id}">Export Packing List</button>
+<div class="s" style="margin:2px 0 6px">Luggage allowance</div><div class="seg" style="margin:0 0 6px">${PRE.map((p,i)=>`<button style="min-height:52px;line-height:1.25" class="${limOf(t,'d')==p[1]&&limOf(t,'p')==p[2]?'on':''}" data-a="preset" data-k="${i}">${p[0]}<br><span class="s">${p[1]?p[1]+' + ':''}${p[2]} kg</span></button>`).join('')}</div><div class="s" style="margin:0 0 8px">Packed ${fmt(wt(t,'d')+wt(t,'p'))} of ${fmt(limOf(t,'d')+limOf(t,'p'))} total allowance. Worn items do not count.</div>${bagRows(t,'p').some(x=>x.g.category=='Toiletries')?'<div class="warn">Liquids, gels and creams in your cabin bag usually need small containers (often 100 ml each) in a clear bag. Check your airline and airport.</div>':''}<div class="bags">${card('d')}${card('p')}${card('w')}</div>
+<div class="seg" style="margin-top:14px"><button class="${tm=='assign'?'on':''}" data-a="tmode" data-m="assign">Assign items</button><button class="${tm=='pack'?'on':''}" data-a="tmode" data-m="pack">Pack &amp; tick</button></div>`+body+`<button class="big" data-a="delt" data-id="${t.id}">Delete trip</button>`+FT}
+
+/* ---------- kit list ---------- */
+function kitData(t){asg(t);const out={};CATS.forEach(c=>out[c]=[]);
+S.inventory.filter(g=>t.as[g.id]).sort(byName).forEach(g=>['d','p','w'].forEach(c=>{const n=(t.as[g.id]||{})[c];if(n>0)(out[g.category]||out.Other).push({t:nm(g)+(n>1?' ×'+n:''),b:c,pk:t.pk.includes(g.id+':'+c)})}));
+return CATS.filter(c=>out[c].length).map(c=>[c,out[c]])}
+function kitV(){const t=T(cur);if(!t)return tripsV();const D=kitData(t),meta=[t.dest,t.env,fd(t.start,t.end)].filter(Boolean);
+return `<div class="noprint"><a class="back" href="#/trip/${t.id}">‹ ${esc(t.name)}</a><div class="seg"><button class="p" data-a="print">Print / Save PDF</button><button data-a="img">Save image</button></div><p class="s">Tip: in the print dialog choose “Save as PDF” for a PDF file.</p></div>
+<div class="sheet" id="sheet"><h2>${esc(t.name.toUpperCase())}</h2>${meta.map(m=>`<div>${esc(m)}</div>`).join('')}<h4 style="font-size:15px;margin-top:22px">PACKING LIST</h4>
+${D.length?D.map(([c,l])=>`<div class="cat"><h4>${c.toUpperCase()}</h4>${l.map(i=>`<div class="kr"><span class="bx">${i.pk?'✓':''}</span><span>${esc(i.t)}</span><em class="${i.b=='p'?'m':i.b=='w'?'w':''}">${BN[i.b].toUpperCase()}</em></div>`).join('')}</div>`).join(''):'<p>Nothing assigned yet.</p>'}
+<div class="tot">Checked ${fmt(wt(t,'d'))} &nbsp;·&nbsp; Cabin ${fmt(wt(t,'p'))} &nbsp;·&nbsp; Worn ${fmt(wt(t,'w'))}</div><div class="pg">Packing list · ${esc(t.name)}</div></div>`}
+function kitImg(){const t=T(cur),D=kitData(t),W=1240,P=80,L=[];
+L.push(['t',t.name.toUpperCase()]);[t.dest,t.env,fd(t.start,t.end)].filter(Boolean).forEach(m=>L.push(['m',m]));L.push(['g',0]);L.push(['k','PACKING LIST']);
+D.forEach(([c,l])=>{L.push(['h',c.toUpperCase()]);l.forEach(i=>L.push(['i',i.t,BN[i.b].toUpperCase(),i.pk,i.b]))});
+L.push(['f','Checked '+fmt(wt(t,'d'))+'   ·   Cabin '+fmt(wt(t,'p'))+'   ·   Worn '+fmt(wt(t,'w'))]);
+const H=P*2+L.reduce((a,x)=>a+({t:64,m:40,g:20,k:60,h:64,i:44,f:70}[x[0]]),0),cv=document.createElement('canvas');cv.width=W;cv.height=Math.max(H,1754);const x=cv.getContext('2d');
+x.fillStyle='#fff';x.fillRect(0,0,W,cv.height);x.fillStyle='#000';x.strokeStyle='#000';x.textBaseline='top';let y=P;const F='-apple-system,Helvetica,Arial,sans-serif';
+L.forEach(l=>{if(l[0]=='t'){x.font='bold 54px '+F;x.fillText(l[1],P,y);y+=64}else if(l[0]=='m'){x.font='30px '+F;x.fillText(l[1],P,y);y+=40}else if(l[0]=='g')y+=20;else if(l[0]=='k'){x.font='bold 32px '+F;x.fillText(l[1],P,y+14);y+=60}
+else if(l[0]=='h'){y+=18;x.font='bold 24px '+F;x.fillText(l[1],P,y);x.fillRect(P,y+32,W-P*2,2);y+=46}
+else if(l[0]=='f'){y+=24;x.font='bold 26px '+F;x.fillText(l[1],P,y);y+=46}
+else{x.lineWidth=3;x.strokeRect(P,y+6,24,24);if(l[3]){x.font='bold 22px '+F;x.fillText('✓',P+3,y+8)}x.font='28px '+F;x.fillText(l[1],P+44,y+4);x.font='bold 18px '+F;const w=x.measureText(l[2]).width;
+if(l[4]=='p'){x.fillRect(W-P-w-16,y+5,w+16,28);x.fillStyle='#fff';x.fillText(l[2],W-P-w-8,y+10);x.fillStyle='#000'}else{if(l[4]=='w')x.setLineDash([6,4]);x.strokeRect(W-P-w-16,y+5,w+16,28);x.setLineDash([]);x.fillText(l[2],W-P-w-8,y+10)}y+=44}});
+cv.toBlob(b=>{const f=new File([b],'packing-list.png',{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[f]}))navigator.share({files:[f]}).catch(()=>{});else{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='packing-list.png';a.click()}})}
+
+/* ---------- actions ---------- */
+const A={
+accept(){S.settings.terms=TERMS;S.settings.termsDate=now();save();location.hash='/wall';view()},go(d){go(d.h)},back(){history.back()},style(d){S.settings.style=d.s;save();view()},preset(d){const t=T(cur),p=PRE[+d.k];t.maxKg=p[1];t.maxKgP=p[2];save();re()},tmode(d){tm=d.m;const y=scrollY;view();scrollTo(0,y)},print(){window.print()},img(){kitImg()},
+saveg(d){const m=$('#m').value.trim();if(!m){alert('Model is required');return}const v={brand:$('#b').value.trim(),model:m,category:$('#c').value,g:+$('#g').value||null,qty:Math.max(1,parseInt($('#q').value)||1),updated_at:now()};
+if(d.id){Object.assign(S.inventory.find(x=>x.id==d.id),v)}else S.inventory.push({id:uid(),created_at:now(),...v});save();go('/cat/'+slug(v.category))},
+wipe(){if(!S.inventory.length){alert('Your Wardrobe is already empty');return}if(confirm('Delete all '+S.inventory.length+' items? This can\'t be undone unless you have a backup. Trips are kept.')){S.inventory=[];save();alert('All items deleted. You can now import a new CSV.');view()}},
+dup(d){const i=S.inventory.find(x=>x.id==d.id);if(!i)return;const c={...i,id:uid(),created_at:now(),updated_at:now()};S.inventory.push(c);save();go('/item/'+c.id)},
+delg(d){if(confirm('Delete this item?')){const i=S.inventory.find(g=>g.id==d.id);S.inventory=S.inventory.filter(g=>g.id!=d.id);save();go('/cat/'+slug(i.category))}},
+doimp(){if(IMP.replace&&!confirm('This deletes your '+S.inventory.length+' current items and replaces them with the import. Continue?'))return;const t=now();if(IMP.replace)S.inventory=[];IMP.rows.filter(r=>!r.err.length&&r.cat&&r.cat!='-').forEach(r=>S.inventory.push({id:uid(),model:r.model,brand:r.brand,category:r.cat,g:r.w||0,qty:r.qty||1,created_at:t,updated_at:t}));save();IMP=null;go('/wall');view()},
+mk(d){const n=$('#n').value.trim();if(!n){alert('Give the trip a name');return}const t=d.id?T(d.id):{id:uid(),as:{},pk:[],created_at:now()};Object.assign(t,{name:n,dest:$('#dst').value.trim(),env:$('#env').value,start:$('#sd').value,end:$('#ed').value,updated_at:now()});if(!d.id)S.trips.unshift(t);save();go('/trip/'+t.id)},
+as(d){const t=T(cur),m=asg(t),g=S.inventory.find(x=>x.id==d.id);if(!g)return;const had=m[d.id]&&m[d.id][d.b];t.pk=t.pk.filter(x=>x.split(':')[0]!=d.id);if(had)delete m[d.id];else m[d.id]={[d.b]:1};save();re()},
+adj(d){const t=T(cur),m=asg(t),g=S.inventory.find(x=>x.id==d.id);if(!g)return;const v=m[d.id]=m[d.id]||{},used=Object.values(v).reduce((a,b)=>a+b,0),n=v[d.b]||0,dl=+d.dl;if(dl>0&&used>=qn(g))return;const nn=Math.max(0,n+dl);if(nn)v[d.b]=nn;else{delete v[d.b];t.pk=t.pk.filter(x=>x!=d.id+':'+d.b)}if(!Object.keys(v).length)delete m[d.id];save();re()},
+tk(d){const t=T(cur),i=t.pk.indexOf(d.id);i<0?t.pk.push(d.id):t.pk.splice(i,1);save();const y=scrollY;view();scrollTo(0,y)},
+delt(d){if(confirm('Delete this trip?')){S.trips=S.trips.filter(t=>t.id!=d.id);save();go('/trips')}},
+bk(){const j=JSON.stringify(S);(navigator.clipboard?navigator.clipboard.writeText(j):Promise.reject()).then(()=>alert('Backup copied')).catch(()=>{$('#rs').value=j;$('#rs').select();alert('Copy the text in the box')})},
+rest(){doRestore($('#rs').value)},
+dl(){const j=JSON.stringify(S,null,1),fn='carryon-backup-'+new Date().toISOString().slice(0,10)+'.json',b=new Blob([j],{type:'application/json'}),f=new File([b],fn,{type:'application/json'});
+if(/iPhone|iPad/.test(navigator.userAgent)&&navigator.canShare&&navigator.canShare({files:[f]}))navigator.share({files:[f]}).catch(()=>{});else{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=fn;document.body.appendChild(a);a.click();a.remove()}}};
+function doRestore(txt){try{let o=JSON.parse(txt);if(o.gear&&!o.inventory)o=Store.migrate(o);if(!o.inventory||!o.trips)throw 0;if(confirm('Replace everything on this device with the backup?')){S=o;S.v=2;S.settings=S.settings||{terms:'',termsDate:''};S.inventory.forEach(i=>{if(OLDCAT[i.category])i.category=OLDCAT[i.category]});save();view()}}catch(e){alert('That doesn\'t look like a backup')}}
+
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b&&A[b.dataset.a]){e.preventDefault();A[b.dataset.a](b.dataset)}});
+document.addEventListener('change',e=>{const t=e.target;if(t.id=='rf'&&t.files[0]){t.files[0].text().then(doRestore)}
+else if(t.id=='f'&&t.files[0]){t.files[0].text().then(x=>{startImp(x);$('#app').innerHTML=impR()})}
+else if(t.id=='rp'){IMP.replace=t.checked}
+else if(t.dataset.lim){const tr=T(cur);if(tr){tr[t.dataset.lim=='d'?'maxKg':'maxKgP']=+t.value;save();re()}}
+else if(t.dataset.ch!==undefined){IMP.rows[+t.dataset.ch].cat=t.value||null;const y=scrollY;$('#app').innerHTML=impR();scrollTo(0,y)}});
+addEventListener('hashchange',view);view();
+if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+</script></body></html>
